@@ -3,7 +3,7 @@ const recipeController = require('../controllers/recipeController.js')
 
 const router = Router();
 
-router.get('/recipe', authController.signup_get);
-router.post('/recipe', authController.signup_post);
+router.get('/recipe', recipeController.recipeMake_get);
+router.post('/recipe', recipeController.recipeMake_post);
 
 module.exports = router; 

@@ -4,17 +4,19 @@ const { Schema } = mongoose;
 const ingredientSchema = new Schema({
   ingredient_name: {
     type: String,
-    required: [true, 'Ingredient name is required']
+    required: [true, 'Ingredient name is required'],
+    unique: false
   },
   weight_unit: {
     type: String,
     enum: ['grams', 'kilograms'], // Specify allowed units
-    required: [true, 'Weight unit is required']
+    required: [true, 'Weight unit is required'],
+    unique: false
   },
   weight: {
     type: Number,
     min: [0, 'Weight must be a positive number'],
-    required: [true, 'Weight is required']
+    required: [true, 'Weight is required'],
   }
 });
 
@@ -26,7 +28,8 @@ const recipeSchema = new Schema({
   },
   ingredient: {
     type: [ingredientSchema],
-    default: []
+    default: [],
+    unique: false
   }
 });
 

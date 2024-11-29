@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes.js');
+const recipeRoutes = require('./routes/recipeRoutes.js');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware.js');
-const Recipe = require('./models/recipe.js');
-//const ingredientSub = require('./models/recipe.js');
+
 
 
 const app = express();
@@ -29,16 +29,5 @@ app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
 app.get('/smoothies', requireAuth,(req, res) => res.render('smoothies'));
 
-
-// testing recipe creating
-app.post('/recipe', async (req, res) => {
-  try {
-    const newRecipe = new Recipe(req.body); // Creates a new recipe document
-    await newRecipe.save(); // Saves the document to the database
-    res.status(201).json(newRecipe); // Responds with the saved recipe
-  } catch (error) {
-    res.status(400).json({ error: error.message }); // Handles validation errors
-  }
-});
-
+app.use(recipeRoutes);
 app.use(authRoutes);
