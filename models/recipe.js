@@ -1,0 +1,34 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const ingredientSchema = new Schema({
+  ingredient_name: {
+    type: String,
+    required: [true, 'Ingredient name is required']
+  },
+  weight_unit: {
+    type: String,
+    enum: ['grams', 'kilograms'], // Specify allowed units
+    required: [true, 'Weight unit is required']
+  },
+  weight: {
+    type: Number,
+    min: [0, 'Weight must be a positive number'],
+    required: [true, 'Weight is required']
+  }
+});
+
+const recipeSchema = new Schema({
+  recipe_name: {
+    type: String,
+    required: [true, 'Please enter a name for the recipe'],
+    unique: true
+  },
+  ingredient: {
+    type: [ingredientSchema],
+    default: []
+  }
+});
+
+const Recipe = mongoose.model('Recipe', recipeSchema);
+module.exports = Recipe;
