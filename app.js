@@ -13,6 +13,7 @@ const app = express();
 app.use(express.static('public'));
 //We need to use express.json when we want to take in json from the user side 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // view engine

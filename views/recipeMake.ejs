@@ -1,14 +1,58 @@
 <%- include('partials/header'); -%>
-
 <header>
-  <div class="smoothie">
-    <img src="/smoothie.png" alt="">
+  <div class="create-recipe content">
+    <form action="/recipe" method="POST">
+      <!-- Recipe Name -->
+      <label for="recipe_name">Recipe Name</label>
+      <input type="text" id="recipe_name" name="recipe_name" required>
+
+      <!-- Ingredients Section -->
+      <div id="ingredients-container">
+        <div class="ingredient-group">
+          <label for="ingredient_name">Ingredient Name:</label>
+          <input type="text" name="ingredient_name[]" required>
+
+          <label for="weight_unit">Weight Unit:</label>
+          <input type="text" name="weight_unit[]" required>
+
+          <label for="weight">Weight:</label>
+          <input type="number" name="weight[]" required>
+        </div>
+      </div>
+
+      <!-- Add Ingredient Button -->
+      <button type="button" id="add-ingredient-button">Add Ingredient</button>
+
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
   </div>
-  <div class="headings">
-    <h2>This is recipe making page</h2>
-    <a href="/smoothies" class="btn">View Recipes</a>
-  </div>
+
+  <!-- JavaScript for Dynamic Ingredients -->
+  <script>
+    document.getElementById("add-ingredient-button").addEventListener("click", function () {
+      const container = document.getElementById("ingredients-container");
+
+      // Create a new ingredient input group
+      const ingredientGroup = document.createElement("div");
+      ingredientGroup.classList.add("ingredient-group");
+
+      ingredientGroup.innerHTML = `
+        <label for="ingredient_name">Ingredient Name:</label>
+        <input type="text" name="ingredient_name[]" required>
+        
+        <label for="weight_unit">Weight Unit:</label>
+        <input type="text" name="weight_unit[]" required>
+        
+        <label for="weight">Weight:</label>
+        <input type="number" name="weight[]" required>
+      `;
+
+      container.appendChild(ingredientGroup);
+    });
+  </script>
 </header>
+
 
 
 <%- include('partials/footer'); -%>
