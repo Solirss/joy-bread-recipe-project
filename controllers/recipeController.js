@@ -21,7 +21,7 @@ module.exports.recipeMake_post = async (req, res) => {
     });
 
     await newRecipe.save();
-    res.status(201).send('Recipe created successfully');
+    res.status(201).redirect('/');
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

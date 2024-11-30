@@ -11,6 +11,7 @@
     <ul>
       <% if (user) { %>
         <li>Welcome, <%= user.email %></li>
+        <li><a href="/recipe">My Recipes</a></li>
         <li><a href="/logout">Log out</a></li>
       <% } else { %>
         <li><a href="/login">Log in</a></li>
