@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes.js');
 const recipeRoutes = require('./routes/recipeRoutes.js');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware.js');
+const Recipe = require('./models/recipe.js');
 
 
 
@@ -28,7 +29,16 @@ mongoose.connect(dbURI)
 // routes
 app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', requireAuth,(req, res) => res.render('smoothies'));
+
+app.get('/smoothies', requireAuth,(req, res) => {
+  Recipe.find()
+    .then( (result) => {
+      res.render('smoothies',{recipe: result});
+    })
+    .catch( (err) => {
+      console.log(err);
+    })
+});
 
 app.use(recipeRoutes);
 app.use(authRoutes);
