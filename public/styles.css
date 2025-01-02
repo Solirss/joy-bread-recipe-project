@@ -137,3 +137,106 @@ footer{
   margin-top: 120px;
   color: #aaa;
 }
+
+.delete{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+/* Enhanced styles for recipe creation form */
+.create-recipe {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.create-recipe form {
+  width: 100%;
+  padding: 40px;
+}
+
+.create-recipe h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ingredient-group {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.ingredient-group h4 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.remove-ingredient-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.remove-ingredient-button:hover {
+  background-color: #ff4757;
+}
+
+#add-ingredient-button {
+  background-color: #4ecdc4;
+  color: white;
+  border: none;
+  border-radius: 36px;
+  padding: 12px 24px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+#add-ingredient-button:hover {
+  background-color: #45b7aa;
+}
+
+.create-recipe input[type="submit"] {
+  background-color: #ff9ff3;
+  color: white;
+  border: none;
+  border-radius: 36px;
+  padding: 12px 24px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.create-recipe input[type="submit"]:hover {
+  background-color: #f368e0;
+}
+
+@media (max-width: 768px) {
+  .create-recipe form {
+    padding: 20px;
+  }
+  
+  .ingredient-group {
+    padding: 15px;
+  }
+}

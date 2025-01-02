@@ -9,7 +9,6 @@ const ingredientSchema = new Schema({
   },
   weight_unit: {
     type: String,
-    enum: ['grams', 'kilograms'], // Specify allowed units
     required: [true, 'Weight unit is required'],
     unique: false
   },

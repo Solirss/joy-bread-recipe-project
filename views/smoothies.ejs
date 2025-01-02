@@ -3,7 +3,8 @@
 <ul class="recipes">
 <%for (var i = 0; i < recipe.length; i++) {%>
     <li class="recipe id-class-<%= recipe[i]._id %>" >
-      <img src="/smoothie.png" alt="smoothie recipe icon">
+      <button type="submit" class="delete js-delete-button" data-doc="<%= recipe[i]._id %>">delete</button>
+      <img src="/JoyBread.jpg" alt="smoothie recipe icon">
       <p><%= recipe[i].recipe_name %></p>
       <input type="number" placeholder="1" id="<%= recipe[i]._id %>" value = 1>
       <button class="amountButton" data-id="<%= recipe[i]._id%>">Calculate</button>
@@ -16,6 +17,7 @@
       <% } %>
     </span>
 
+
     </li>
  <% } %>
 </ul>
@@ -24,15 +26,36 @@
 
 <script>
   const amountButtons = document.querySelectorAll('.amountButton');
-  const recipe = <%- JSON.stringify(recipe) %>; // Step required to use recipe ejs object in JS
+  const deleteButton = document.querySelectorAll('.js-delete-button');
+  /* Step required to use recipe ejs object in JS after the connection with the server has been terminated */
+  const recipe = <%- JSON.stringify(recipe) %>; 
+  
+  deleteButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      console.log('clicked delete button')
+      // The id of the bread the user wants to delete 
+      const id = button.dataset.doc; 
+      // HTML section of the recipe the user want to delete
+      const section = document.querySelector(`.id-class-${id}`); 
+
+      fetch(`/smoothies/${id}`, {
+        method: 'DELETE',
+      })
+      .then(
+        section.style.visibility = 'hidden'
+      )
+      .catch(err => console.log(err));
+    })
+  })
 
   amountButtons.forEach((button) => {
     button.addEventListener('click', () => {
       try {
-        const id = button.dataset.id; // The id of the bread the user wants to manipulate
-        const amount = document.getElementById(`${id}`).value; // Getting the number of bread the user wants to make
+        // The id of the bread the user wants to manipulate 
+        const id = button.dataset.id; 
+        // Getting the number of bread the user wants to make
+        const amount = document.getElementById(`${id}`).value; 
         let recipeObject = null;
-        console.log(id);
 
         // For loop to find the recipe the user has chosen
         for (var i = 0; i < recipe.length; i++) {
@@ -40,7 +63,6 @@
             recipeObject = recipe[i];
           }
         }
-        const section = document.querySelector(`.id-class-${id}`); // HTML section of the recipe the user want to change the quantitiy of
         const pSection = document.querySelector(`.js-p-id-class-${id}`);
         pSection.innerHTML = '';
         let weight = null;

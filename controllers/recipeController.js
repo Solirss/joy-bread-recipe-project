@@ -1,9 +1,6 @@
 const Recipe = require('../models/recipe.js');
 
 module.exports.recipeMake_post = async (req, res) => {
-
-  
-  
   try {
     const { recipe_name, ingredient_name, weight_unit, weight } = req.body;
 

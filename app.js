@@ -40,5 +40,17 @@ app.get('/smoothies', requireAuth,(req, res) => {
     })
 });
 
+app.delete('/smoothies/:id', (req, res) => {
+  const id = req.params.id;
+  Recipe.findByIdAndDelete(id)
+  .then(result => {
+    //re cannot redirect because the request is done through frontend
+    res.json({ redirect: '/smoothies' });
+  })
+  .catch(err => {
+    console.log(err);
+  })
+});
+
 app.use(recipeRoutes);
 app.use(authRoutes);
